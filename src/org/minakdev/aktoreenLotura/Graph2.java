@@ -9,6 +9,7 @@ import java.util.Queue;
 import org.minakdev.aktoreak.AktoreZerrenda;
 import org.minakdev.aktoreak.Aktorea;
 import org.minakdev.aktoreak.Pelikula;
+import java.lang.Math;
 
 public class Graph2 {
 	HashMap<String, Integer> th;
@@ -150,5 +151,28 @@ public class Graph2 {
 			Collections.reverse(eran);
 			return eran;
 		}
+	}
+	
+	public double erlazioenGradua(){
+		int kantitate = 100;
+		double diferentzia = 0.01;
+		double em1 = 0.0;
+		double em2 = 1.0;
+		while (Math.abs(em1-em2)>diferentzia){
+			em2 = em1;
+			em1 = erlazioa(kantitate);
+			kantitate = kantitate*2;
+		}
+		return em1;
+	}
+	
+	private double erlazioa(int kant){
+		double emaitza=0.0;
+		Aktorea a1;
+		Aktorea a2;
+		for(int i=0; i<kant;i++){
+			emaitza= emaitza + (double)((konektatutaErlazioa(a1.getIzena(),a2.getIzena()).size()/2)+1);
+		}
+		return emaitza;
 	}
 }
