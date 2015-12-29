@@ -15,18 +15,26 @@ public class Graph2 {
 	HashMap<String, Integer> th;
 	String[] keys;
 	ArrayList<Integer>[] adjList;
+	HashMap<String, Integer> aktoreZenbaki;
+	Aktorea[] aktoreakZerrenda;
 	
 	public void grafoaSortu(AktoreZerrenda lAktoreak) {
 		// Post: aktoreen zerrendatik grafoa sortzen du
 		//       Adabegiak aktoreen izenak eta pelikulen izenburuak dira 
 		int kont = 0;
+		int kontAktore = 0;
 		// 1. pausoa: â€œthâ€� bete
 		th = new HashMap<String, Integer>();
+		aktoreZenbaki = new HashMap<String, Integer>();
+		aktoreakZerrenda = new Aktorea[lAktoreak.luzera()];
 		
 		for (int j = 0; j < lAktoreak.luzera(); j++){
 			Aktorea a = lAktoreak.getZerrenda().get(j);
 			if (!(th.containsKey(a.getIzena()))){
 				th.put(a.getIzena(), kont++);
+				aktoreakZerrenda[kontAktore] = a;
+				aktoreZenbaki.put(a.getIzena(), kontAktore++);
+				
 			}
 			ArrayList<Pelikula> pz = a.pelikulakBueltatu().getPelikulaZerrenda();
 			for(int k=0; k < pz.size(); k++){
@@ -174,5 +182,34 @@ public class Graph2 {
 			emaitza= emaitza + (double)((konektatutaErlazioa(a1.getIzena(),a2.getIzena()).size()/2)+1);
 		}
 		return emaitza;
+	}
+	
+	public void zentralitateakLortu (){
+		int probaKop = 100;
+		int[] agerpenKop = new int[aktoreakZerrenda.length];
+		int i =0;
+		
+		while (i < probaKop){
+			Aktorea akt1 = lortuAktorea();
+			Aktorea akt2 = lortuAktorea();
+			ArrayList<String> lotura = konektatutaErlazioa(akt1.getIzena(), akt2.getIzena());
+			if (lotura != null){
+				i++;
+				for (int j=2; j < lotura.size()-1; j=j+2){
+					agerpenKop[aktoreZenbaki.get(lotura.get(j))] ++;
+				}
+			}
+		}
+		for (int k = 0; k<agerpenKop.length; k++){
+			Aktorea a = aktoreakZerrenda[k];
+			a.setZentralitatea(((double)agerpenKop[k])/((double)probaKop));
+		}
+		
+	}
+
+	private Aktorea lortuAktorea() {
+		// TODO Auto-generated method stub
+		//random
+		return null;
 	}
 }
