@@ -246,7 +246,7 @@ public class Aktoreak {
 				Pelikula pelikula = hashTable.get(pelikulaIzena);
 			
 				if(pelikula == null) {
-					pelikula = new Pelikula(pelikulaIzena);
+					pelikula = new Pelikula("P::".concat(pelikulaIzena));
 					Pelikulak.getNirePelikulak().sartuPelikula(pelikula);
 					hashTable.put(pelikulaIzena, pelikula);
 				}

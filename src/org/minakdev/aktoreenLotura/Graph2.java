@@ -9,6 +9,7 @@ import java.util.Queue;
 import org.minakdev.aktoreak.AktoreZerrenda;
 import org.minakdev.aktoreak.Aktorea;
 import org.minakdev.aktoreak.Pelikula;
+
 import java.lang.Math;
 
 public class Graph2 {
@@ -30,12 +31,11 @@ public class Graph2 {
 		
 		for (int j = 0; j < lAktoreak.luzera(); j++){
 			Aktorea a = lAktoreak.getZerrenda().get(j);
-			if (!(th.containsKey(a.getIzena()))){
+			//if (!(th.containsKey(a.getIzena()))){
 				th.put(a.getIzena(), kont++);
 				aktoreakZerrenda[kontAktore] = a;
-				aktoreZenbaki.put(a.getIzena(), kontAktore++);
-				
-			}
+				aktoreZenbaki.put(a.getIzena(), kontAktore++);	
+			//}
 			ArrayList<Pelikula> pz = a.pelikulakBueltatu().getPelikulaZerrenda();
 			for(int k=0; k < pz.size(); k++){
 				Pelikula p = pz.get(k);
@@ -185,8 +185,8 @@ public class Graph2 {
 	}
 	
 	public void zentralitateakLortu (){
-		int probaKop = 100;
-		int[] agerpenKop = new int[aktoreakZerrenda.length];
+		int probaKop = 10;
+		int[] agerpenKop = new int[aktoreZenbaki.size()];
 		int i =0;
 		
 		while (i < probaKop){
@@ -204,12 +204,10 @@ public class Graph2 {
 			Aktorea a = aktoreakZerrenda[k];
 			a.setZentralitatea(((double)agerpenKop[k])/((double)probaKop));
 		}
-		
 	}
 
 	private Aktorea lortuAktorea() {
-		// TODO Auto-generated method stub
-		//random
-		return null;
+		int a = (int)(Math.random()*(aktoreakZerrenda.length));
+		return aktoreakZerrenda[a];
 	}
 }
