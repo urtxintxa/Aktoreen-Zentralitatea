@@ -46,7 +46,13 @@ public class Aktorea implements Comparable<Aktorea>{
 	
 	public int compareTo2(Aktorea o){
 		// TODO Auto-generated method stub
-		return this.zentralitatea.compareTo(o.zentralitatea);
+		if (this.zentralitatea > o.zentralitatea){
+			return -10;
+		}
+		else if(this.zentralitatea < o.zentralitatea){
+			return 10;
+		}
+		return 0;
 	}
 	
 	public void setZentralitatea(double pZentralitatea){

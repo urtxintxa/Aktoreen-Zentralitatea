@@ -176,7 +176,7 @@ public class AktoreZerrenda {
 		int eskuin = erdikoa+1;
 		int k = 0; //bateratua taula betetzeko indizea
 		while ( ezker<=erdikoa && eskuin<=f ){
-			if ( taula[ezker].compareTo(taula[eskuin])<= 0 ){
+			if ( taula[ezker].compareTo2(taula[eskuin])<= 0 ){
 				bateratua[k] = taula[ezker];
 				k++;
 				ezker++;

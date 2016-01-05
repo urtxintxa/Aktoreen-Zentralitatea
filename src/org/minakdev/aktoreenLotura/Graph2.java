@@ -33,6 +33,7 @@ public class Graph2 {
 			Aktorea a = lAktoreak.getZerrenda().get(j);
 			th.put(a.getIzena(), kont++);
 			aktoreakZerrenda[kontAktore] = a;
+			aktoreZenbaki.put(a.getIzena(), kontAktore++);
 			ArrayList<Pelikula> pz = a.pelikulakBueltatu().getPelikulaZerrenda();
 			for(int k=0; k < pz.size(); k++){
 				Pelikula p = pz.get(k);
@@ -181,8 +182,8 @@ public class Graph2 {
 		return emaitza;
 	}
 	
-	public void zentralitateakLortu (){
-		int probaKop = 1000;
+	public void zentralitateakLortu (int probaKop){
+		//int probaKop = 10000;
 		int[] agerpenKop = new int[aktoreZenbaki.size()];
 		int i = 0;
 		
@@ -191,9 +192,11 @@ public class Graph2 {
 			Aktorea akt2 = lortuAktorea();
 			ArrayList<String> lotura = konektatutaErlazioa(akt1.getIzena(), akt2.getIzena());
 			if (lotura != null){
-				i++;
-				for (int j=2; j < lotura.size()-1; j=j+2){
-					agerpenKop[aktoreZenbaki.get(lotura.get(j))] ++;
+				if (lotura.size()>4){
+					i++;
+					for (int j=2; j < lotura.size()-1; j=j+2){
+						agerpenKop[aktoreZenbaki.get(lotura.get(j))] ++;
+					}
 				}
 			}
 		}
