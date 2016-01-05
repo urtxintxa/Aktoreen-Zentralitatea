@@ -154,7 +154,7 @@ public class Aktoreak {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//Aktoreak.getNireAktoreak().aktoreakOrdenatu();
+		//Aktoreak.getNireAktoreak().aktoreakOrdenatuAlfabetitkoki();
 	}
 	
 	public void aktoreenZerrendaGorde() throws FileNotFoundException, UnsupportedEncodingException {		
@@ -268,8 +268,8 @@ public class Aktoreak {
 		
 	}
 	
-	public void aktoreakOrdenatu() {
-		 this.aktoreZerrenda.aktoreakOrdenatu();
+	public void aktoreakOrdenatuAlfabetitkoki() {
+		 this.aktoreZerrenda.aktoreakOrdenatuAlfabetikoki();
 	}
 	
 	public void aktoreaEzabatu(String izena){
@@ -296,5 +296,18 @@ public class Aktoreak {
 	
 	public int luzera(){
 		return this.aktoreZerrenda.luzera();
+	}
+	
+	public void zentralitatearenAraberaOrdenatu() {
+		this.aktoreZerrenda.zentralitatearenAraberaOrdenatu();
+	}
+	
+	public Aktorea bilatuZentralitatea (String pIzena) {
+		return this.aktoreZerrenda.bilatuZentralitatea(pIzena);
+	}
+	
+	public ArrayList<Aktorea> getZentralitateHandienekoak(int pKantitatea) {
+		// Aurrebaldintza: Zerrenda zentralitatearen arabera ordenatuta egon behar da.
+		return this.aktoreZerrenda.getZentralitateHandienekoak(pKantitatea);
 	}
 }

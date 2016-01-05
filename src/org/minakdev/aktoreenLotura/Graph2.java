@@ -31,11 +31,8 @@ public class Graph2 {
 		
 		for (int j = 0; j < lAktoreak.luzera(); j++){
 			Aktorea a = lAktoreak.getZerrenda().get(j);
-			//if (!(th.containsKey(a.getIzena()))){
-				th.put(a.getIzena(), kont++);
-				aktoreakZerrenda[kontAktore] = a;
-				aktoreZenbaki.put(a.getIzena(), kontAktore++);	
-			//}
+			th.put(a.getIzena(), kont++);
+			aktoreakZerrenda[kontAktore] = a;
 			ArrayList<Pelikula> pz = a.pelikulakBueltatu().getPelikulaZerrenda();
 			for(int k=0; k < pz.size(); k++){
 				Pelikula p = pz.get(k);
@@ -185,9 +182,9 @@ public class Graph2 {
 	}
 	
 	public void zentralitateakLortu (){
-		int probaKop = 10;
+		int probaKop = 1000;
 		int[] agerpenKop = new int[aktoreZenbaki.size()];
-		int i =0;
+		int i = 0;
 		
 		while (i < probaKop){
 			Aktorea akt1 = lortuAktorea();

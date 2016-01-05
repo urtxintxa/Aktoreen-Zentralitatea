@@ -6,7 +6,7 @@ public class Aktorea implements Comparable<Aktorea>{
 	
 	private String izena;
 	private PelikulaZerrenda pelikulaZerrenda;
-	private double zentralitatea;
+	private Double zentralitatea;
 	
 	public Aktorea(String pIzena) {
 		this.izena = pIzena;
@@ -17,6 +17,10 @@ public class Aktorea implements Comparable<Aktorea>{
 		return this.izena;
 	}
 	
+	public Double getZentralitatea() {
+		return zentralitatea;
+	}
+
 	public Iterator<Pelikula> getIteradorea(){
 		return this.pelikulaZerrenda.getIteradorea();
 	}
@@ -37,6 +41,12 @@ public class Aktorea implements Comparable<Aktorea>{
 	public int compareTo(Aktorea o){
 		// TODO Auto-generated method stub
 		return this.izena.compareTo(o.izena);
+	}
+	
+	
+	public int compareTo2(Aktorea o){
+		// TODO Auto-generated method stub
+		return this.zentralitatea.compareTo(o.zentralitatea);
 	}
 	
 	public void setZentralitatea(double pZentralitatea){

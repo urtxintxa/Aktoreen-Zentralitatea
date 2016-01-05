@@ -1,6 +1,7 @@
 package org.minakdev.aktoreak;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class AktoreZerrenda {
 
@@ -38,7 +39,7 @@ public class AktoreZerrenda {
 		return aktore;
 	}
 	
-	public void aktoreakOrdenatu() {
+	public void aktoreakOrdenatuAlfabetikoki() {
 		Aktorea aktoreArray[] = new Aktorea[this.aktoreZerrenda.size()];              
 		for(int i = 0; i < this.aktoreZerrenda.size(); i++){
 			aktoreArray[i] = this.aktoreZerrenda.get(i);
@@ -52,7 +53,7 @@ public class AktoreZerrenda {
 	
 	private void mergeSort(Aktorea[] taula){
 		 this.mergeSort(taula, 0, taula.length-1);
-		}
+	}
 		
 	private void mergeSort (Aktorea[] taulaBat, int hasiera, int bukaera){
 		 if (hasiera < bukaera) { // taulan elementu bat baino gehiago badago
@@ -131,5 +132,87 @@ public class AktoreZerrenda {
 	}
 	public int luzera() {
 		return this.aktoreZerrenda.size();
+	}
+	
+	public Aktorea bilatuZentralitatea(String pIzena) {
+		Aktorea aktore = null;
+		Iterator<Aktorea> i = this.aktoreZerrenda.iterator();
+		while(i.hasNext() && aktore == null) {
+			Aktorea aktoreAux = i.next();
+			if(aktoreAux.getIzena().equals(pIzena)){
+				aktore = aktoreAux;
+			}
+		}
+		return aktore;
+	}
+	
+	public void zentralitatearenAraberaOrdenatu() {
+		Aktorea aktoreArray[] = new Aktorea[this.aktoreZerrenda.size()];              
+		for(int i = 0; i < this.aktoreZerrenda.size(); i++){
+			aktoreArray[i] = this.aktoreZerrenda.get(i);
+		}
+		this.mergeSort2(aktoreArray);
+		this.aktoreZerrenda.clear();
+		for(int i = 0; i < aktoreArray.length; i++){
+			this.aktoreZerrenda.add(aktoreArray[i]);
+		}
+	}
+	
+	private void mergeSort2 (Aktorea[] taula){
+		 this.mergeSort2(taula, 0, taula.length-1);
+	}
+		
+	private void mergeSort2 (Aktorea[] taulaBat, int hasiera, int bukaera){
+		 if (hasiera < bukaera) { // taulan elementu bat baino gehiago badago
+			 this.mergeSort2(taulaBat, hasiera, (hasiera+bukaera)/2);
+			 this.mergeSort2(taulaBat, ((hasiera+bukaera)/2)+1, bukaera);
+			 this.bateratze2(taulaBat, hasiera, (hasiera+bukaera)/2, bukaera);
+		 }
+	}
+	
+	private void bateratze2 (Aktorea[] taula, int i, int erdikoa, int f){
+		Aktorea[] bateratua = new Aktorea[f-i+1];
+		int ezker = i;
+		int eskuin = erdikoa+1;
+		int k = 0; //bateratua taula betetzeko indizea
+		while ( ezker<=erdikoa && eskuin<=f ){
+			if ( taula[ezker].compareTo(taula[eskuin])<= 0 ){
+				bateratua[k] = taula[ezker];
+				k++;
+				ezker++;
+			}
+			else {
+				bateratua[k] = taula[eskuin];
+				k++;
+				eskuin++;
+			}
+		}
+		if ( ezker > erdikoa ) {
+			while ( eskuin<=f ){
+				bateratua[k] = taula[eskuin];
+				k++;
+				eskuin++;
+			}
+		}	 
+		else {
+			while ( ezker<=erdikoa ){
+				bateratua[k] = taula[ezker];
+				k++;
+				ezker++;
+			}
+		}
+		for (int j=i; j<=f; j++){
+			taula[j] = bateratua[j-i];
+		}
+	}
+	
+	public ArrayList<Aktorea> getZentralitateHandienekoak(int pKantitatea) {
+		// Aurrebaldintza: Zerrenda zentralitatearen arabera ordenatuta egon behar da.
+		ArrayList<Aktorea> zentralitateHandienekoak = new ArrayList<Aktorea>();
+		Iterator<Aktorea> i = this.aktoreZerrenda.iterator();
+		while (i.hasNext() && zentralitateHandienekoak.size() < pKantitatea) {
+			zentralitateHandienekoak.add(i.next());
+		}
+		return zentralitateHandienekoak;
 	}
 }
