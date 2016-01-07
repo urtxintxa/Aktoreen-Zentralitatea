@@ -160,27 +160,34 @@ public class Graph2 {
 	}
 	
 	public double erlazioenGradua(){
-		int kantitate = 100;
-		double diferentzia = 0.01;
-		double em1 = 0.0;
-		double em2 = 1.0;
-		while (Math.abs(em1-em2)>diferentzia){
-			em2 = em1;
-			em1 = erlazioa(kantitate);
-			kantitate = kantitate*2;
-		}
-		return em1;
+		  int kantitate = 100;
+		  double diferentzia = 0.01;
+		  double em1 = erlazioa(kantitate);
+		  double em2 = 0.0;
+		  while (Math.abs(em1-em2)>diferentzia){
+			  kantitate = kantitate*2;
+			  em2 = em1;
+			  em1 = (em1+ erlazioa(kantitate/2))/2;
+		  }
+		  return em1;
 	}
-	
+		 
 	private double erlazioa(int kant){
 		double emaitza=0.0;
-		Aktorea a1;
-		Aktorea a2;
-		for(int i=0; i<kant;i++){
-			emaitza= emaitza + (double)((konektatutaErlazioa(a1.getIzena(),a2.getIzena()).size()/2)+1);
-		}
-		return emaitza;
-	}
+		Aktorea a1 = lortuAktorea();
+		Aktorea a2 = lortuAktorea();
+		int kantitate = 0;
+		while (kantitate<kant){
+			if(!(a1.equals(a2))){
+				ArrayList<String> lotura = konektatutaErlazioa(a1.getIzena(),a2.getIzena());
+				if (lotura!=null){
+					emaitza= emaitza + (double)(lotura.size()/2+1);
+					kantitate++;
+				}
+			} 
+		 }
+		 return (emaitza/(double)kant);
+	 }
 	
 	public void zentralitateakLortu (int probaKop){
 		//int probaKop = 10000;
