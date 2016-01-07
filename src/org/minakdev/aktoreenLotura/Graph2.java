@@ -174,14 +174,14 @@ public class Graph2 {
 		 
 	private double erlazioa(int kant){
 		double emaitza=0.0;
-		Aktorea a1 = lortuAktorea();
-		Aktorea a2 = lortuAktorea();
 		int kantitate = 0;
 		while (kantitate<kant){
+			Aktorea a1 = lortuAktorea();
+			Aktorea a2 = lortuAktorea();
 			if(!(a1.equals(a2))){
 				ArrayList<String> lotura = konektatutaErlazioa(a1.getIzena(),a2.getIzena());
 				if (lotura!=null){
-					emaitza= emaitza + (double)(lotura.size()/2+1);
+					emaitza= emaitza + (double)(lotura.size()/2);
 					kantitate++;
 				}
 			} 
